@@ -11,20 +11,32 @@ async function load_model() {
     // It's possible to load the model locally or from a repo
     // You can choose whatever IP and PORT you want in the "http://127.0.0.1:8080/model.json" just set it before in your https server
     //const model = await loadGraphModel("http://127.0.0.1:8080/model.json");
-    const model = await loadGraphModel("https://raw.githubusercontent.com/hugozanini/TFJS-object-detection/master/models/kangaroo-detector/model.json");
+    const model = await loadGraphModel("https://raw.githubusercontent.com/fabrik-space/TFJS-object-detection/master/models/web_model/model.json");
     return model;
   }
 
+// let classesDir = {
+//     1: {
+//         name: 'Kangaroo',
+//         id: 1,
+//     },
+//     2: {
+//         name: 'Other',
+//         id: 2,
+//     }
+// }
+
 let classesDir = {
     1: {
-        name: 'Kangaroo',
+        name: 'low_fuel',
         id: 1,
     },
     2: {
-        name: 'Other',
+        name: 'oil_level',
         id: 2,
     }
 }
+
 
 class App extends React.Component {
   videoRef = React.createRef();
@@ -37,7 +49,7 @@ class App extends React.Component {
         .getUserMedia({
           audio: false,
           video: {
-            facingMode: "user"
+            facingMode: "environment"
           }
         })
         .then(stream => {
@@ -152,7 +164,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Real-Time Object Detection: Kangaroo</h1>
+        <h1>Real-Time Object Detection: Dash</h1>
         <h3>MobileNetV2</h3>
         <video
           style={{height: '600px', width: "500px"}}
